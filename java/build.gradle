@@ -1,0 +1,89 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.solrac.computers'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+javafx {
+    version = '17.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JavaFX is handled by the plugin, but we also add explicit deps for safety
+    implementation "org.openjfx:javafx-controls:17.0.2"
+    implementation "org.openjfx:javafx-fxml:17.0.2"
+
+    // Logging (optional)
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+
+    // JSON handling
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+application {
+    mainModule = 'com.solrac.computers'
+    mainClass = 'com.solrac.computers.SolracApp'
+}
+
+tasks.named('run') {
+    // Pass system properties to the application
+    systemProperties = System.properties as Map<String, ?>
+}
+
+// Custom task to test AI connection
+tasks.register('testAI', JavaExec) {
+    group = 'verification'
+    description = 'Test AI service connection'
+    classpath = sourceSets.main.runtimeClasspath
+    mainModule = 'com.solrac.computers'
+    mainClass = 'com.solrac.computers.util.TestAI'
+}
+
+// Custom task to test port connection
+tasks.register('testPort', JavaExec) {
+    group = 'verification'
+    description = 'Test port 4891 connection'
+    classpath = sourceSets.main.runtimeClasspath
+    mainModule = 'com.solrac.computers'
+    mainClass = 'com.solrac.computers.util.TestPort'
+}
+
+// Custom task to test all AI services (diagnosis + cost estimation)
+tasks.register('testAIServices', JavaExec) {
+    group = 'verification'
+    description = 'Comprehensive test of all AI services'
+    classpath = sourceSets.main.runtimeClasspath
+    mainModule = 'com.solrac.computers'
+    mainClass = 'com.solrac.computers.util.TestAIServices'
+}
+
+// Interactive AI test - ask custom questions
+tasks.register('testInteractive', JavaExec) {
+    group = 'verification'
+    description = 'Interactive AI test - ask custom device repair questions'
+    classpath = sourceSets.main.runtimeClasspath
+    mainModule = 'com.solrac.computers'
+    mainClass = 'com.solrac.computers.util.InteractiveAITest'
+    standardInput = System.in
+}
+
+
+
+
+
+
+

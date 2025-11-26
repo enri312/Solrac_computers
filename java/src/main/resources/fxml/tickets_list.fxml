@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.solrac.computers.controller.TicketsListController"
+      spacing="25" style="-fx-background-color: transparent;">
+    
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+    
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label fx:id="titleLabel" text="Inventario de Equipos" styleClass="label-title" HBox.hgrow="ALWAYS">
+            <font><Font name="System Bold" size="32"/></font>
+        </Label>
+        
+        <!-- Search Bar -->
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Label text="🔍" style="-fx-font-size: 18px;"/>
+            <TextField fx:id="searchField" promptText="Buscar cliente..." 
+                       prefWidth="250" styleClass="text-field"/>
+            <Button text="↻" onAction="#handleRefresh" styleClass="button-secondary"
+                    style="-fx-font-size: 18px; -fx-padding: 8 16;"/>
+        </HBox>
+    </HBox>
+    
+    <!-- Table -->
+    <TableView fx:id="ticketsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="customerColumn" text="Cliente" prefWidth="150"/>
+            <TableColumn fx:id="deviceColumn" text="Equipo" prefWidth="100"/>
+            <TableColumn fx:id="modelColumn" text="Modelo" prefWidth="150"/>
+            <TableColumn fx:id="problemColumn" text="Problema" prefWidth="250"/>
+            <TableColumn fx:id="statusColumn" text="Estado" prefWidth="130"/>
+            <TableColumn fx:id="dateColumn" text="Fecha" prefWidth="100"/>
+            <TableColumn fx:id="totalColumn" text="Total" prefWidth="80"/>
+        </columns>
+        
+        <placeholder>
+            <Label text="No hay equipos registrados" style="-fx-text-fill: #6b7280;"/>
+        </placeholder>
+    </TableView>
+</VBox>

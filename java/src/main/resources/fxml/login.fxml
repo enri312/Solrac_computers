@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.solrac.computers.controller.LoginController"
+           style="-fx-background-color: #0b0c15;">
+    
+    <!-- Background gradient effects -->
+    <Region style="-fx-background-color: radial-gradient(center 25% 25%, radius 40%, rgba(0,100,255,0.2), transparent);"/>
+    <Region style="-fx-background-color: radial-gradient(center 75% 75%, radius 50%, rgba(178,75,243,0.2), transparent);"/>
+    
+    <!-- Login Card -->
+    <VBox alignment="CENTER" maxWidth="450" spacing="30" styleClass="glass-card">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        
+        <!-- Logo and Title -->
+        <VBox alignment="CENTER" spacing="15">
+            <Region prefHeight="80" prefWidth="80" 
+                    style="-fx-background-color: linear-gradient(to bottom right, #00d4ff, #b24bf3); 
+                           -fx-background-radius: 20; 
+                           -fx-effect: dropshadow(gaussian, rgba(0,212,255,0.5), 15, 0, 0, 0);"/>
+            
+            <Label text="Solrac_Computer's" styleClass="label-title">
+                <font>
+                    <Font name="System Bold" size="28"/>
+                </font>
+            </Label>
+            
+            <Label fx:id="titleLabel" text="Ingresar al Sistema" styleClass="label-secondary">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+        </VBox>
+        
+        <!-- Login Form -->
+        <VBox spacing="20">
+            <VBox spacing="8">
+                <Label fx:id="userLabel" text="Usuario" styleClass="label-secondary"/>
+                <TextField fx:id="usernameField" promptText="admin" styleClass="text-field"/>
+            </VBox>
+            
+            <VBox spacing="8">
+                <Label fx:id="passLabel" text="Contraseña" styleClass="label-secondary"/>
+                <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="text-field"/>
+            </VBox>
+            
+            <Label fx:id="errorLabel" text="Error" style="-fx-text-fill: #ef4444;" visible="false"/>
+            
+            <Button fx:id="loginButton" text="Ingresar" onAction="#handleLogin" 
+                    styleClass="button-primary" maxWidth="Infinity">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Button>
+        </VBox>
+        
+        <!-- Language Toggle -->
+        <HBox alignment="CENTER">
+            <Button fx:id="langButton" text="ES" onAction="#handleLanguageToggle"
+                    styleClass="button-ghost" prefWidth="60">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+</StackPane>

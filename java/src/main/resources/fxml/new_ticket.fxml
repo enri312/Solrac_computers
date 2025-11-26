@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.solrac.computers.controller.NewTicketController"
+    fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+
+    <VBox spacing="30" style="-fx-background-color: transparent;">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40" />
+        </padding>
+
+        <!-- Title -->
+        <Label fx:id="titleLabel" text="Registrar Equipo" styleClass="label-title">
+            <font>
+                <Font name="System Bold" size="32" />
+            </font>
+        </Label>
+
+        <!-- Form Card -->
+        <VBox styleClass="glass-card" spacing="25">
+
+            <!-- Customer and Device Data in Grid -->
+            <GridPane hgap="30" vgap="20">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                    <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                </columnConstraints>
+
+                <!-- Customer Data Column -->
+                <VBox GridPane.columnIndex="0" spacing="15">
+                    <Label text="👤 Datos del Cliente" styleClass="label-neon-blue">
+                        <font>
+                            <Font name="System Bold" size="16" />
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8">
+                        <Label text="Nombre Completo" styleClass="label-secondary" />
+                        <TextField fx:id="nameField" promptText="Juan Pérez" styleClass="text-field" />
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Dirección" styleClass="label-secondary" />
+                        <TextField fx:id="addressField" promptText="Av. Siempre Viva 123"
+                            styleClass="text-field" />
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Teléfono / Celular" styleClass="label-secondary" />
+                        <TextField fx:id="phoneField" promptText="0981-555-0101"
+                            styleClass="text-field" />
+                    </VBox>
+                </VBox>
+
+                <!-- Device Data Column -->
+                <VBox GridPane.columnIndex="1" spacing="15">
+                    <Label text="💻 Datos del Equipo" styleClass="label-neon-blue">
+                        <font>
+                            <Font name="System Bold" size="16" />
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8">
+                        <Label text="Tipo de Equipo" styleClass="label-secondary" />
+                        <ComboBox fx:id="deviceTypeCombo" maxWidth="Infinity" styleClass="combo-box" />
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Modelo" styleClass="label-secondary" />
+                        <TextField fx:id="modelField" promptText="Dell XPS 15"
+                            styleClass="text-field" />
+                    </VBox>
+
+                    <GridPane hgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                        </columnConstraints>
+
+                        <VBox GridPane.columnIndex="0" spacing="8">
+                            <Label text="Monto Abonado ($)" styleClass="label-secondary" />
+                            <TextField fx:id="amountPaidField" promptText="0"
+                                styleClass="text-field" />
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="1" spacing="8">
+                            <Label text="Costo Total ($)" styleClass="label-secondary" />
+                            <TextField fx:id="totalCostField" promptText="0" styleClass="text-field" />
+                        </VBox>
+                    </GridPane>
+                </VBox>
+            </GridPane>
+
+            <Separator style="-fx-background-color: rgba(255,255,255,0.1);" />
+
+            <!-- Problem Description -->
+            <VBox spacing="15">
+                <Label text="🔧 Descripción del Problema" styleClass="label-neon-blue">
+                    <font>
+                        <Font name="System Bold" size="16" />
+                    </font>
+                </Label>
+
+                <TextArea fx:id="problemDescArea" promptText="Describa el problema del equipo..."
+                    prefRowCount="3" wrapText="true" styleClass="text-area" />
+
+                <!-- AI Consultation -->
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <ProgressIndicator fx:id="aiLoadingIndicator" prefWidth="20" prefHeight="20" />
+                    <Button fx:id="consultAiButton" text="✨ Consultar Diagnóstico IA"
+                        onAction="#handleConsultAI" styleClass="button-secondary" />
+                </HBox>
+
+                <!-- AI Diagnosis (hidden by default) -->
+                <VBox fx:id="aiDiagnosisContainer" spacing="8">
+                    <Label text="💡 Recomendación DeepSeek"
+                        style="-fx-text-fill: #00d4ff; -fx-font-weight: bold; -fx-font-size: 14px;" />
+                    <TextArea fx:id="aiDiagnosisArea" editable="false" prefRowCount="8"
+                        wrapText="true" minHeight="200"
+                        styleClass="text-area"
+                        style="-fx-background-color: rgba(0,212,255,0.1); 
+                                     -fx-border-color: rgba(0,212,255,0.3); 
+                                     -fx-border-width: 1;
+                                     -fx-text-fill: #e5e7eb;
+                                     -fx-border-radius: 8;
+                                     -fx-background-radius: 8;
+                                     -fx-padding: 12;" />
+                </VBox>
+            </VBox>
+
+            <!-- Observations -->
+            <VBox spacing="8">
+                <Label text="Observaciones Técnicas" styleClass="label-secondary" />
+                <TextArea fx:id="observationsArea" promptText="Notas adicionales del técnico..."
+                    prefRowCount="3" wrapText="true" styleClass="text-area" />
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <padding>
+                    <Insets top="20" />
+                </padding>
+
+                <Button fx:id="cancelButton" text="Cancelar" onAction="#handleCancel"
+                    styleClass="button-ghost" prefWidth="120" />
+                <Button fx:id="registerButton" text="Registrar Ingreso" onAction="#handleRegister"
+                    styleClass="button-primary" prefWidth="180" />
+            </HBox>
+        </VBox>
+    </VBox>
+</ScrollPane>
