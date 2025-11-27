@@ -1,6 +1,7 @@
+// Build configuration for Solrac Computers application
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 group = 'com.solrac.computers'
@@ -14,7 +15,7 @@ java {
 
 javafx {
     version = '17.0.2'
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.base', 'javafx.graphics']
 }
 
 repositories {
@@ -22,11 +23,9 @@ repositories {
 }
 
 dependencies {
-    // JavaFX is handled by the plugin, but we also add explicit deps for safety
-    implementation "org.openjfx:javafx-controls:17.0.2"
-    implementation "org.openjfx:javafx-fxml:17.0.2"
-
-    // Logging (optional)
+    // JavaFX modules are handled by the plugin above
+    
+    // Logging
     implementation 'org.slf4j:slf4j-api:2.0.9'
     implementation 'org.slf4j:slf4j-simple:2.0.9'
 
